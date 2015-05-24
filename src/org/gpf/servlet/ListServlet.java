@@ -1,12 +1,15 @@
 package org.gpf.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.gpf.bean.Message;
+import org.gpf.factory.DAOFactory;
 import org.gpf.util.DBConnection;
 
 /**
@@ -20,13 +23,15 @@ public class ListServlet extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		request.getRequestDispatcher("/WEB-INF/jsp/back/list.jsp").forward(request, response);
-		if (new DBConnection().getConnection()!=null) {
-			System.out.println("数据库连接成功！");
-		}else {
-			System.out.println("失败！");
+		
+		try {
+			List<Message>messages = DAOFactory.getIMessageDAOInstance().findAll();
+			request.setAttribute("messages", messages);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		request.getRequestDispatcher("/WEB-INF/jsp/back/list.jsp").forward(request, response);
+		
 	}
 
 	@Override
