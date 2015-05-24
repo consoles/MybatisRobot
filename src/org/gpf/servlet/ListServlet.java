@@ -26,6 +26,7 @@ public class ListServlet extends HttpServlet {
 		
 		try {
 			List<Message>messages = DAOFactory.getIMessageDAOInstance().findAll();
+			System.out.println(messages);
 			request.setAttribute("messages", messages);
 		} catch (Exception e) {
 			e.printStackTrace();
