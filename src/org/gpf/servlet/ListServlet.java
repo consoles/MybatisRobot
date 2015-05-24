@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.gpf.util.DBConnection;
+
 /**
  * 列表页面初始化控制
  * @author gaopengfei
@@ -19,7 +21,12 @@ public class ListServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		request.getRequestDispatcher("/WEB-INF/jsp/back/list.jsp").forward(request, response);	
+		request.getRequestDispatcher("/WEB-INF/jsp/back/list.jsp").forward(request, response);
+		if (new DBConnection().getConnection()!=null) {
+			System.out.println("数据库连接成功！");
+		}else {
+			System.out.println("失败！");
+		}
 	}
 
 	@Override
