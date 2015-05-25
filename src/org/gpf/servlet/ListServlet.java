@@ -26,6 +26,8 @@ public class ListServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String command = request.getParameter("command");
 		String description = request.getParameter("description");
+		request.setAttribute("command", command);			// 把接收到的值放在request中，在前台可以通过EL表达式取出
+		request.setAttribute("description", description);
 		try {
 			List<Message>messages = DAOFactory.getIMessageDAOInstance().findAll(command, description);
 			request.setAttribute("messages", messages);
