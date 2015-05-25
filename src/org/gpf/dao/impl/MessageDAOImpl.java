@@ -16,10 +16,12 @@ import org.gpf.dao.IMessageDAO;
  */
 public class MessageDAOImpl implements IMessageDAO {
 
-	String sql = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	Connection conn = null;
+	
+	Message m = null;
+	List<Message> messages;
 	
 	public MessageDAOImpl(Connection conn) {
 		this.conn = conn;
@@ -28,11 +30,31 @@ public class MessageDAOImpl implements IMessageDAO {
 	@Override
 	public List<Message> findAll() throws Exception {
 		
-		Message m = null;
-		List<Message> messages = new ArrayList<Message>();
+		String sql = "SELECT id,command,description,content FROM message";
+		messages = new ArrayList<Message>();
 		
-		sql = "SELECT id,command,description,content FROM message";
 		pstmt = conn.prepareStatement(sql);
+		rs = pstmt.executeQuery();
+		while (rs.next()) {
+			m = new Message();
+			messages.add(m);	// 由于操作的是引用数据类型，先加入和后加入并没有任何区别
+			m.setId(rs.getString("id"));
+			m.setCommand(rs.getString("command"));
+			m.setDescription(rs.getString("description"));
+			m.setContent(rs.getString("content"));
+		}
+		return messages;
+	}
+
+	@Override
+	public List<Message> findAll(String key1, String key2) throws Exception {
+		
+		String sql = "SELECT id,command,description,content FROM message WHERE command = ? OR description LIKE ?";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, "查看");
+		pstmt.setString(2, "%" + "精彩内容" + "%");
+		messages = new ArrayList<Message>();
+		
 		rs = pstmt.executeQuery();
 		while (rs.next()) {
 			m = new Message();

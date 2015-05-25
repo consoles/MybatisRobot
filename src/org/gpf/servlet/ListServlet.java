@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.gpf.bean.Message;
 import org.gpf.factory.DAOFactory;
-import org.gpf.util.DBConnection;
 
 /**
  * 列表页面初始化控制
@@ -26,7 +25,7 @@ public class ListServlet extends HttpServlet {
 		
 		try {
 			List<Message>messages = DAOFactory.getIMessageDAOInstance().findAll();
-			System.out.println(messages);
+//			System.out.println(messages);
 			request.setAttribute("messages", messages);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -38,7 +37,18 @@ public class ListServlet extends HttpServlet {
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doGet(request, response);
+		
+		request.setCharacterEncoding("utf-8");
+		String command = request.getParameter("command");
+		String description = request.getParameter("description");
+		
+		try {
+			List<Message>messages = DAOFactory.getIMessageDAOInstance().findAll(command,description);
+			request.setAttribute("messages", messages);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		request.getRequestDispatcher("/WEB-INF/jsp/back/list.jsp").forward(request, response);
 	}
 
 }

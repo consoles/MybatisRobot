@@ -10,4 +10,19 @@
 
 		javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  java.naming.factory.initial
   出现以上原因是因为java单元的环境是jdk；而jsp的环境却是tomcat；数据连接池是在tomcat中配置的，所以能正常运行的，但java测试的环境只有jdk，所以在引用数据连接池时就时出现找不环境的错误。
+- 在使用MySQL进行模糊查询的时候一定要注意在预处理	语句中最好只写？不要把%写入到里面，最后在查询之前通过`pstmt.setString(1, "%" + keyword + "%");`的方式给占位符填入内容。即：应该采用下面的方式：
+
+		String sql = "SELECT id,command,description,content FROM message WHERE command = ? OR description LIKE ?";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, "查看");
+		pstmt.setString(2, "%" + "精彩内容" + "%");
 	
+		rs = pstmt.executeQuery();
+
+下面的这种方式容易导致**Parameter   index   out   of   range   (1   >   number   of   parameters,   which   is   0).**这样的问题。
+
+	String sql = "SELECT id,command,description,content FROM message WHERE command = ? OR description LIKE %?%";
+	pstmt = conn.prepareStatement(sql);
+	pstmt.setString(1, "查看");
+	pstmt.setString(2, "精彩内容");
+

@@ -11,5 +11,13 @@ import org.gpf.bean.Message;
  */
 public interface IMessageDAO {
 	
-	public List<Message>findAll() throws Exception;	// 查询所有的消息
+	/**
+	 * 查询所有消息
+	 */
+	public List<Message>findAll() throws Exception;
+	
+	/**
+	 * 根据关键字查询消息
+	 */
+	public List<Message>findAll(String key1,String key2) throws Exception;
 }
