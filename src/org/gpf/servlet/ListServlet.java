@@ -23,9 +23,11 @@ public class ListServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		request.setCharacterEncoding("utf-8");
+		String command = request.getParameter("command");
+		String description = request.getParameter("description");
 		try {
-			List<Message>messages = DAOFactory.getIMessageDAOInstance().findAll();
-//			System.out.println(messages);
+			List<Message>messages = DAOFactory.getIMessageDAOInstance().findAll(command, description);
 			request.setAttribute("messages", messages);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -38,17 +40,7 @@ public class ListServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		request.setCharacterEncoding("utf-8");
-		String command = request.getParameter("command");
-		String description = request.getParameter("description");
-		
-		try {
-			List<Message>messages = DAOFactory.getIMessageDAOInstance().findAll(command,description);
-			request.setAttribute("messages", messages);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		request.getRequestDispatcher("/WEB-INF/jsp/back/list.jsp").forward(request, response);
+		doGet(request, response);
 	}
 
 }

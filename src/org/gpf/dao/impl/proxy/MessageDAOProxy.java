@@ -22,15 +22,6 @@ public class MessageDAOProxy implements IMessageDAO {
 	}
 	
 	@Override
-	public List<Message> findAll() throws Exception {
-		
-		List<Message> messages = null;
-		messages = this.dao.findAll();
-		this.dbc.closeConnection();
-		return messages;
-	}
-
-	@Override
 	public List<Message> findAll(String key1, String key2) throws Exception {
 		
 		List<Message> messages = null;

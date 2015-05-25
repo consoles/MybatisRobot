@@ -28,33 +28,28 @@ public class MessageDAOImpl implements IMessageDAO {
 	}
 	
 	@Override
-	public List<Message> findAll() throws Exception {
-		
-		String sql = "SELECT id,command,description,content FROM message";
-		messages = new ArrayList<Message>();
-		
-		pstmt = conn.prepareStatement(sql);
-		rs = pstmt.executeQuery();
-		while (rs.next()) {
-			m = new Message();
-			messages.add(m);	// 由于操作的是引用数据类型，先加入和后加入并没有任何区别
-			m.setId(rs.getString("id"));
-			m.setCommand(rs.getString("command"));
-			m.setDescription(rs.getString("description"));
-			m.setContent(rs.getString("content"));
-		}
-		return messages;
-	}
-
-	@Override
 	public List<Message> findAll(String key1, String key2) throws Exception {
 		
-		String sql = "SELECT id,command,description,content FROM message WHERE command = ? OR description LIKE ?";
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, "查看");
-		pstmt.setString(2, "%" + "精彩内容" + "%");
-		messages = new ArrayList<Message>();
+		StringBuilder sql = new StringBuilder("SELECT id,command,description,content FROM message WHERE 1 = 1");
 		
+		List<String> paramList = new ArrayList<String>();	// 该list用来暂存查询参数
+		if (key1 != null && !"".equals(key1.trim())) {
+			sql.append(" AND command = ?");
+			paramList.add(key1);
+		}
+		if (key2 != null && !"".equals(key2.trim())) {
+			sql.append(" AND description LIKE '%' ? '%'");  // 这里需要注意MySQL的字符串拼接
+			paramList.add(key2);
+		}
+		
+		pstmt = conn.prepareStatement(sql.toString());		// 调整了这一条语句的位置，修正了MySQL的插入越界错误
+		if (paramList!=null) {
+			for (int i = 0; i < paramList.size(); i++) {
+				pstmt.setString(i+1, paramList.get(i));
+			}
+		}
+		
+		messages = new ArrayList<Message>();
 		rs = pstmt.executeQuery();
 		while (rs.next()) {
 			m = new Message();
