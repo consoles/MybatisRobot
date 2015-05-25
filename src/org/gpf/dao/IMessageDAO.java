@@ -12,7 +12,7 @@ import org.gpf.bean.Message;
 public interface IMessageDAO {
 	
 	/**
-	 * 根据关键字查询消息
+	 * 根据关键字查询列表
 	 */
-	public List<Message>findAll(String key1,String key2) throws Exception;
+	public List<Message> queryMessageList(String key1,String key2) throws Exception;
 }

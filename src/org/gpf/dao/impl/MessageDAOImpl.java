@@ -28,7 +28,7 @@ public class MessageDAOImpl implements IMessageDAO {
 	}
 	
 	@Override
-	public List<Message> findAll(String key1, String key2) throws Exception {
+	public List<Message> queryMessageList(String key1, String key2) throws Exception {
 		
 		StringBuilder sql = new StringBuilder("SELECT id,command,description,content FROM message WHERE 1 = 1");
 		

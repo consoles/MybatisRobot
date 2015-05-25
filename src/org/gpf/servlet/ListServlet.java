@@ -24,17 +24,21 @@ public class ListServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		request.setCharacterEncoding("utf-8");
+		
+		// 接收页面参数
 		String command = request.getParameter("command");
 		String description = request.getParameter("description");
-		request.setAttribute("command", command);			// 把接收到的值放在request中，在前台可以通过EL表达式取出
+		
+		// 把接收到的值放在request中，在前台可以通过EL表达式取出
+		request.setAttribute("command", command);			
 		request.setAttribute("description", description);
 		try {
-			List<Message>messages = DAOFactory.getIMessageDAOInstance().findAll(command, description);
+			List<Message>messages = DAOFactory.getIMessageDAOInstance().queryMessageList(command, description); // 查询消息列表
 			request.setAttribute("messages", messages);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		request.getRequestDispatcher("/WEB-INF/jsp/back/list.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/jsp/back/list.jsp").forward(request, response); // 跳转
 		
 	}
 

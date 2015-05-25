@@ -22,10 +22,10 @@ public class MessageDAOProxy implements IMessageDAO {
 	}
 	
 	@Override
-	public List<Message> findAll(String key1, String key2) throws Exception {
+	public List<Message> queryMessageList(String key1, String key2) throws Exception {
 		
 		List<Message> messages = null;
-		messages = this.dao.findAll(key1, key2);
+		messages = this.dao.queryMessageList(key1, key2);
 		this.dbc.closeConnection();
 		return messages;
 	}
