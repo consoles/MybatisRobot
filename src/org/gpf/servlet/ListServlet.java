@@ -1,15 +1,11 @@
 package org.gpf.servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.gpf.bean.Message;
-import org.gpf.factory.DAOFactory;
 
 /**
  * 列表页面初始化控制
@@ -33,8 +29,8 @@ public class ListServlet extends HttpServlet {
 		request.setAttribute("command", command);			
 		request.setAttribute("description", description);
 		try {
-			List<Message>messages = DAOFactory.getIMessageDAOInstance().queryMessageList(command, description); // 查询消息列表
-			request.setAttribute("messages", messages);
+//			List<Message>messages = DAOFactory.getIMessageDAOInstance().queryMessageList(command, description); // 查询消息列表
+//			request.setAttribute("messages", messages);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

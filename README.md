@@ -26,3 +26,7 @@
 	pstmt.setString(1, "查看");
 	pstmt.setString(2, "精彩内容");
 
+- Mybatis异常：
+
+![](http://i.imgur.com/SJbXobf.jpg)
+解决方案：MyBatis3.3.0可能存在以上的问题，下载3.2.8完美解决
