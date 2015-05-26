@@ -5,6 +5,12 @@
 - 将所有的图片、css样式、js等单独建立目录存放，存放在WebRoot的resource目录下。
 - 放在WEB-INF/jsp目录下的jsp文件最好也按照前台页面和后台页面进行分类
 
+![](http://i.imgur.com/3FCZAiY.jpg)
+![](http://i.imgur.com/wRWV3QU.jpg)
+![](http://i.imgur.com/Sk3oiyf.jpg)
+- 使用log4j动态调试SQL
+	
+将Mybatis源码包下的mybatis-3-mybatis-3.2.8\src\test\java\log4j.properties拷贝到项目的src目录下，修改此属性文件。
 ## 问题及解决方案 ##
 - 使用JNDI配置Tomcat数据源，在获得数据库连接的类中就不能用main方法进行测试了，会抛出异常：
 
@@ -29,4 +35,4 @@
 - Mybatis异常：
 
 ![](http://i.imgur.com/SJbXobf.jpg)
-解决方案：MyBatis3.3.0可能存在以上的问题，下载3.2.8完美解决
+解决方案：MyBatis3.3.0可能存在以上的问题，下载3.2.8完美解决。

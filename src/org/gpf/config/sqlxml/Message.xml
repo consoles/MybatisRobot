@@ -32,8 +32,16 @@
   </resultMap>
 
   <!-- id属性为唯一标识一条SQL语句，以便让Java代码中的SqlSession调用 ,resultMap指定结果集的id-->	
-  <select id="queryMessagesList" resultMap="MessageResult">
+  <select id="queryMessagesList" resultMap="MessageResult" parameterType="org.gpf.bean.Message">
     SELECT id,command,description,content FROM message WHERE 1 = 1
+    <!-- 采用OGNL表达式，功能强大，可以直接调用Java对象的方法；#{变量名}相当于JDBC中的占位符 -->
+    <!-- 注意双引号转义,&&可以转义为&amp;&amp;或者直接写成and -->
+    <if test="command !=null and !&quot;&quot;.equals(command.trim())">
+    	AND command = #{command}
+    </if>
+    <if test="description !=null &amp;&amp; !&quot;&quot;.equals(description.trim())">
+    	AND description LIKE '%' #{description} '%'
+    </if>
   </select>
 
 </mapper>

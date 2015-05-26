@@ -2,9 +2,12 @@ package org.gpf.dao;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
+import org.apache.log4j.Logger;
 import org.gpf.bean.Message;
 import org.gpf.db.DBAccess;
 
@@ -28,8 +31,11 @@ public class MessageDAO {
 		List<Message> messageList = new ArrayList<Message>();
 		try {
 			sqlSession = dbAccess.getSqlSession();							// 在DAO层进行异常处理
+			Message message = new Message();								// 实例化传入SQL语句的对象
+			message.setCommand(command);									// 为对象设置属性字段
+			message.setDescription(description);
 			// 通过SqlSession执行SQL语句
-			messageList = sqlSession.selectList("Message.queryMessagesList");// 名称空间.SQL语句ID
+			messageList = sqlSession.selectList("Message.queryMessagesList",message);// 名称空间.SQL语句ID
 		} catch (IOException e) {
 			e.printStackTrace();
 		}finally{
@@ -46,5 +52,11 @@ public class MessageDAO {
 	public static void main(String[] args) {
 		MessageDAO messageDAO = new MessageDAO();
 		messageDAO.queryMessagesList("", "");
+		Map<String, Message>messageMap = new HashMap<String, Message>();
+		messageMap.put("key", new Message());
+		
+//		Logger log;
+//		log.debug("aaa");
+//		log.info(message)
 	}
 }

@@ -74,5 +74,8 @@
 				</div>
 			</div>
 	    </form>
+	    <hr />
+	    调试信息：
+	  
 	</body>
 </html>
