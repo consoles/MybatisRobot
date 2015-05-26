@@ -14,7 +14,7 @@
 		<title>内容列表页面</title>
 		<link href="<%=basePath %>resource/css/all.css" rel="stylesheet" type="text/css" />
 		<script src="<%=basePath %>resource/js/common/jquery-2.1.1.js"></script>
-		<script src="<%=basePath %>resource/js/common/list.js"></script>
+		<script src="<%=basePath %>resource/js/back/list.js"></script>
 	</head>
 	<body style="background: #e1e9eb;">
 		<form action="<%=basePath %>List.action" id="mainForm" method="post">
@@ -56,7 +56,7 @@
 										<td>${message.description }</td>
 										<td>
 											<a href="">修改</a>&nbsp;&nbsp;&nbsp;
-											<a href="<%=basePath%>DeleteOne.action?id=${message.id }">删除</a>
+											<a href="javascript:deleteOne('<%=basePath%>',${message.id });">删除</a>
 										</td>
 									</tr>
 								</c:forEach>

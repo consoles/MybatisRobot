@@ -162,7 +162,7 @@ function render() {
 function appendDialog(myClass,name,content) {
 	var div = "";
 	div += "<div class='" + myClass + "'>";
-	div += "<div class='user'><img src='" + $("#basePath").val() + "resources/images/thumbs/" + myClass + ".jpg'/>" + name + "</div>";
+	div += "<div class='user'><img src='" + $("#basePath").val() + "resource/images/thumbs/" + myClass + ".jpg'/>" + name + "</div>";
 	div += "<div class='talk_recordtextbg'>&nbsp;</div>";
 	div += "<div class='talk_recordtext'>";
 	div += "<h3>" + content + "</h3>";
