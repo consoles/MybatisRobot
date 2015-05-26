@@ -45,7 +45,7 @@
 								    <th>描述</th>
 								    <th>操作</th>
 								</tr>
-								<c:forEach items="${messages }" var="message" varStatus="status">
+								<c:forEach items="${messageList }" var="message" varStatus="status">
 									<!-- 使用c：if解决隔行换色 -->
 									<tr <c:if test="${status.index %2!=0 }">style='background-color:#ECF6EE;'</c:if>>
 										<td><input type="checkbox" /></td>

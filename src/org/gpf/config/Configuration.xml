@@ -55,9 +55,9 @@
     </environment>
   </environments>
 
-<!-- 
+  <!-- 导入SQL的配置文件 -->	
   <mappers>
-    <mapper resource="org/apache/ibatis/submitted/complex_property/User.xml"/>
+    <mapper resource="org/gpf/config/sqlxml/Message.xml"/>
   </mappers>
--->
+
 </configuration>
