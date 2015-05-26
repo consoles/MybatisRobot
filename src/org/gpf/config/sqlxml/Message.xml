@@ -43,5 +43,9 @@
     	AND description LIKE '%' #{description} '%'
     </if>
   </select>
-
+  
+  <!-- 单条删除 -->
+  <delete id="deleteOne" parameterType="int">
+  	DELETE FROM message WHERE id = #{_parameter}
+  </delete>
 </mapper>

@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
-import org.apache.log4j.Logger;
 import org.gpf.bean.Message;
 import org.gpf.db.DBAccess;
 
@@ -46,6 +45,24 @@ public class MessageDAO {
 	}
 	
 	/**
+	 *  删除单条记录
+	 * @param id
+	 */
+	public void deleteOne(int id){
+		DBAccess dbAccess = new DBAccess();
+		SqlSession sqlSession = null;				
+		try {
+			sqlSession = dbAccess.getSqlSession();
+			sqlSession.delete("Message.deleteOne",id);
+			sqlSession.commit();						// 删除的时候需要手动提交事务
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally{
+			if (sqlSession != null)
+				sqlSession.close();
+		}
+	}
+	/**
 	 * 测试是否取得SqlSession
 	 * @param args
 	 */
@@ -55,8 +72,5 @@ public class MessageDAO {
 		Map<String, Message>messageMap = new HashMap<String, Message>();
 		messageMap.put("key", new Message());
 		
-//		Logger log;
-//		log.debug("aaa");
-//		log.info(message)
 	}
 }

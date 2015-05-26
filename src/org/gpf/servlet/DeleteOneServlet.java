@@ -7,15 +7,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.gpf.service.ListService;
-
+import org.gpf.service.MaintainService;
 /**
- * 列表页面初始化控制层
+ * 单条删除控制层
  * @author gaopengfei
- * @date 2015-5-24 下午4:03:22
+ * @date 2015-5-26 下午6:19:00
  */
 @SuppressWarnings("serial")
-public class ListServlet extends HttpServlet {
+public class DeleteOneServlet extends HttpServlet {
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -24,17 +23,12 @@ public class ListServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		// 接收页面参数
-		String command = request.getParameter("command");
-		String description = request.getParameter("description");
-		
+		String id = request.getParameter("id");
 		// 向页面传值
-		request.setAttribute("command", command);		// 把接收到的值放在request中，在前台可以通过EL表达式取出	
-		request.setAttribute("description", description);
-		ListService listService = new ListService();
-		request.setAttribute("messageList", listService.queryMessagesList(command, description));
-		
+		MaintainService maintainService = new MaintainService();
+		maintainService.deleteOne(id);
 		// 跳转
-		request.getRequestDispatcher("/WEB-INF/jsp/back/list.jsp").forward(request, response); 
+		request.getRequestDispatcher("/List.action").forward(request, response); 
 		
 	}
 
