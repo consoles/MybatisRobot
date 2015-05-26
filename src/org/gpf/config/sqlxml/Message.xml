@@ -48,4 +48,12 @@
   <delete id="deleteOne" parameterType="int">
   	DELETE FROM message WHERE id = #{_parameter}
   </delete>
+  <!-- 批量删除 -->
+  <delete id="deleteBatch" parameterType="java.util.List">
+  	DELETE FROM message WHERE id IN(
+  		<foreach collection="list" item="item" separator=",">
+  			#{item}
+  		</foreach>
+  	)
+  </delete>
 </mapper>

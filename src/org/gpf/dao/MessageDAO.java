@@ -2,9 +2,7 @@ package org.gpf.dao;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.gpf.bean.Message;
@@ -62,15 +60,23 @@ public class MessageDAO {
 				sqlSession.close();
 		}
 	}
+
 	/**
-	 * 测试是否取得SqlSession
-	 * @param args
+	 * 批量删除
+	 * @param id
 	 */
-	public static void main(String[] args) {
-		MessageDAO messageDAO = new MessageDAO();
-		messageDAO.queryMessagesList("", "");
-		Map<String, Message>messageMap = new HashMap<String, Message>();
-		messageMap.put("key", new Message());
-		
+	public void deleteBatch(List<Integer> ids){
+		DBAccess dbAccess = new DBAccess();
+		SqlSession sqlSession = null;				
+		try {
+			sqlSession = dbAccess.getSqlSession();
+			sqlSession.delete("Message.deleteBatch",ids);
+			sqlSession.commit();						// 删除的时候需要手动提交事务
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally{
+			if (sqlSession != null)
+				sqlSession.close();
+		}
 	}
 }

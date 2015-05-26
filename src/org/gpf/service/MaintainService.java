@@ -1,5 +1,8 @@
 package org.gpf.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.gpf.dao.MessageDAO;
 
 /**
@@ -19,5 +22,20 @@ public class MaintainService {
 			MessageDAO messageDAO = new MessageDAO();
 			messageDAO.deleteOne(Integer.parseInt(id));
 		}
+	}
+	
+	/**
+	 * 批量删除
+	 * @param ids
+	 */
+	public void deleteBatch(String[] ids){
+		
+		MessageDAO messageDAO = new MessageDAO();
+		List<Integer> idList = new ArrayList<Integer>();
+		for (String s : ids) {
+			idList.add(Integer.parseInt(s));
+		}
+		
+		messageDAO.deleteBatch(idList);
 	}
 }
