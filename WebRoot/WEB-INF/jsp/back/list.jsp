@@ -12,9 +12,9 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta http-equiv="X-UA-Compatible"content="IE=9; IE=8; IE=7; IE=EDGE" />
 		<title>内容列表页面</title>
-		<link href="<%=basePath %>/resource/css/all.css" rel="stylesheet" type="text/css" />
-		<script src="<%=basePath %>/resource/js/jquery-2.1.1.js"></script>
-		<script src="<%=basePath %>/resource/js/list.js"></script>
+		<link href="<%=basePath %>resource/css/all.css" rel="stylesheet" type="text/css" />
+		<script src="<%=basePath %>resource/js/common/jquery-2.1.1.js"></script>
+		<script src="<%=basePath %>resource/js/common/list.js"></script>
 	</head>
 	<body style="background: #e1e9eb;">
 		<form action="<%=basePath %>List.action" id="mainForm" method="post">

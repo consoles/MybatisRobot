@@ -45,4 +45,14 @@
   	<servlet-name>DeleteBatchServlet</servlet-name>
   	<url-pattern>/DeleteBatch.action</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  	<description>对话界面初始化</description>
+  	<servlet-name>InitTalkServlet</servlet-name>
+  	<servlet-class>org.gpf.servlet.InitTalkServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>InitTalkServlet</servlet-name>
+  	<url-pattern>/InitTalk.action</url-pattern>
+  </servlet-mapping>
 </web-app>

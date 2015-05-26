@@ -9,6 +9,18 @@
 ![](http://i.imgur.com/wRWV3QU.jpg)
 ![](http://i.imgur.com/Sk3oiyf.jpg)
 - 使用log4j动态调试SQL
+
+- JDBC中的通过Connecttion接口执行一条SQL语句其实就是提交了一个事务，多条语句之间互不干扰。如果我们将事务的自动提交设置为false，SQL语句（insert、update、delete就不会立即执行了）。就像这样：
+
+		Connection conn;
+		conn.setAutoCommit(false);					// 设置事务不自动提交
+		
+		conn.prepareStatement("sql1").execute();
+		conn.prepareStatement("sql12").execute();
+		
+		conn.commit();								// 提交事务（或者conn.rollback回滚）
+
+Mybatis对JDBC进行封装时候将事务的自动提交设置为了false，所以我们在执行删除语句的时候应该在最后手动提交。
 	
 将Mybatis源码包下的mybatis-3-mybatis-3.2.8\src\test\java\log4j.properties拷贝到项目的src目录下，修改此属性文件。
 ## 问题及解决方案 ##
