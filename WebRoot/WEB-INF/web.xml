@@ -9,13 +9,16 @@
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
   
-  <resource-ref>
-  	<description>配置Tomcat数据源（资源引用）</description>
-  	<res-ref-name>jdbc/mybatisrobot</res-ref-name>
-  	<res-type>javax.sql.DataSource</res-type>
-  	<res-auth>Container</res-auth>
-  </resource-ref>
-  
+  <filter>
+  	<description>字符编码过滤器</description>
+  	<filter-name>CharsetFilter</filter-name>
+  	<filter-class>org.gpf.filter.CharsetFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>CharsetFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+   
   <servlet>
   	<description>跳转到列表页面</description>
   	<servlet-name>ListServlet</servlet-name>
@@ -36,7 +39,7 @@
   	<url-pattern>/DeleteOne.action</url-pattern>
   </servlet-mapping>
   
-    <servlet>
+  <servlet>
   	<description>批量删除</description>
   	<servlet-name>DeleteBatchServlet</servlet-name>
   	<servlet-class>org.gpf.servlet.DeleteBatchServlet</servlet-class>
@@ -45,7 +48,17 @@
   	<servlet-name>DeleteBatchServlet</servlet-name>
   	<url-pattern>/DeleteBatch.action</url-pattern>
   </servlet-mapping>
-  
+
+  <servlet>
+  	<description>添加消息</description>
+  	<servlet-name>InsertServlet</servlet-name>
+  	<servlet-class>org.gpf.servlet.InsertServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>InsertServlet</servlet-name>
+  	<url-pattern>/Insert.action</url-pattern>
+  </servlet-mapping>
+    
   <servlet>
   	<description>对话界面初始化</description>
   	<servlet-name>InitTalkServlet</servlet-name>

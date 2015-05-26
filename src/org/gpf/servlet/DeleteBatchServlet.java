@@ -20,8 +20,6 @@ public class DeleteBatchServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		request.setCharacterEncoding("utf-8");
-		
 		// 接收页面参数
 		String[] ids = request.getParameterValues("id"); // 获取页面传过来的多个值
 		// 向页面传值

@@ -20,8 +20,6 @@ public class DeleteOneServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		request.setCharacterEncoding("utf-8");
-		
 		// 接收页面参数
 		String id = request.getParameter("id");
 		// 向页面传值

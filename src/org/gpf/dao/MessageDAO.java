@@ -43,7 +43,7 @@ public class MessageDAO {
 	}
 	
 	/**
-	 *  删除单条记录
+	 *  删除单条消息
 	 * @param id
 	 */
 	public void deleteOne(int id){
@@ -62,7 +62,7 @@ public class MessageDAO {
 	}
 
 	/**
-	 * 批量删除
+	 * 批量删除消息
 	 * @param id
 	 */
 	public void deleteBatch(List<Integer> ids){
@@ -75,6 +75,35 @@ public class MessageDAO {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}finally{
+			if (sqlSession != null)
+				sqlSession.close();
+		}
+	}
+	
+	/**
+	 * 插入消息
+	 * @param command
+	 * @param description
+	 * @param content
+	 */
+	public void insertMessage(String command,String description,String content){
+		
+		DBAccess dbAccess = new DBAccess();
+		SqlSession sqlSession = null;
+		
+		try {
+			sqlSession = dbAccess.getSqlSession();
+			
+			Message message = new Message();
+			message.setCommand(command);
+			message.setContent(content);
+			message.setDescription(description);
+			
+			sqlSession.insert("Message.insertMessage", message);
+			sqlSession.commit();	// 不要忘记哟
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
 			if (sqlSession != null)
 				sqlSession.close();
 		}

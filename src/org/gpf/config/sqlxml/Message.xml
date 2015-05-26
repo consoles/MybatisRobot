@@ -56,4 +56,9 @@
   		</foreach>
   	)
   </delete>
+  
+  <insert id="insertMessage" parameterType="org.gpf.bean.Message">
+  	INSERT INTO message(id,command,description,content) 
+  		VALUES(#{id},#{command,jdbcType=VARCHAR},#{description,jdbcType=VARCHAR},#{content,jdbcType=VARCHAR})
+  </insert>
 </mapper>
