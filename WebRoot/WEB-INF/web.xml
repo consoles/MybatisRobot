@@ -64,8 +64,18 @@
   	<servlet-name>InitTalkServlet</servlet-name>
   	<servlet-class>org.gpf.servlet.InitTalkServlet</servlet-class>
   </servlet>
+  <servlet>
+    <description>自动回复</description>
+    <servlet-name>AutoReplyServlet</servlet-name>
+    <servlet-class>org.gpf.servlet.AutoReplyServlet</servlet-class>
+  </servlet>
+
   <servlet-mapping>
   	<servlet-name>InitTalkServlet</servlet-name>
   	<url-pattern>/InitTalk.action</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AutoReplyServlet</servlet-name>
+    <url-pattern>/AutoReply.action</url-pattern>
   </servlet-mapping>
 </web-app>

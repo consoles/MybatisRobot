@@ -16,12 +16,15 @@ $(function(){
  */
 function send() {
 	var content = $("#content").val();
+	// 如果content=""或者content=undefined或者content=0，则它在if表达式中的判断是false
 	if(!content) {
 		alert("请输入内容！");
 		return;
 	}
+	
+	// bathPath是从页面的隐藏域中取出的
 	$.ajax({
-		url : $("#basePath").val() + "AutoReplyServlet.action",
+		url : $("#basePath").val() + "AutoReply.action",
 		type : "POST",
 		dataType : "text",
 		timeout : 10000,
@@ -29,7 +32,7 @@ function send() {
 			appendDialog("talk_recordboxme","My账号",content);
 			appendDialog("talk_recordbox","公众号",data);
 			$("#content").val("");
-			render();
+			render();	// 是否该出滚动条了
 		},
 		data : {"content":content}
 	});

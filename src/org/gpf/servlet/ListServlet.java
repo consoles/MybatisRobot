@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.gpf.service.ListService;
+import org.gpf.service.QueryService;
 
 /**
  * 列表页面初始化控制层
@@ -28,7 +28,7 @@ public class ListServlet extends HttpServlet {
 		// 向页面传值
 		request.setAttribute("command", command);		// 把接收到的值放在request中，在前台可以通过EL表达式取出	
 		request.setAttribute("description", description);
-		ListService listService = new ListService();
+		QueryService listService = new QueryService();
 		request.setAttribute("messageList", listService.queryMessagesList(command, description));
 		
 		// 跳转

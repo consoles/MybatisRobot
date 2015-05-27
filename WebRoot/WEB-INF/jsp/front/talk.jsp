@@ -20,6 +20,7 @@
 	<script type="text/javascript" src="<%= basePath %>resource/js/front/talk.js"></script>
 	</head>
 	<body>
+		<!-- 隐藏域，在此域中保存basePath，JS可以从这里取出 -->
 		<input type="hidden" value="<%= basePath %>" id="basePath"/>
 		<br/>
 		<div class="talk">
